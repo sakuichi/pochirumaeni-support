@@ -1,0 +1,360 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ポチる前に — 欲しいものを寝かせる我慢リスト</title>
+<style>
+  :root {
+    --paper: #FFF9F2;
+    --card: #FFFFFF;
+    --ink: #4A3B32;
+    --soft: #A5907F;
+    --line: #F2E5D8;
+    --accent: #E07A54;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #FBEEE5;
+    --radius: 16px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #221B16;
+      --card: #2C241E;
+      --ink: #F1E7DE;
+      --soft: #A5907F;
+      --line: #423830;
+      --accent: #E68C67;
+      --accent-ink: #2A1810;
+      --accent-soft: #3A2C23;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #221B16;
+    --card: #2C241E;
+    --ink: #F1E7DE;
+    --soft: #A5907F;
+    --line: #423830;
+    --accent: #E68C67;
+    --accent-ink: #2A1810;
+    --accent-soft: #3A2C23;
+  }
+
+  :root[data-theme="light"] {
+    --paper: #FFF9F2;
+    --card: #FFFFFF;
+    --ink: #4A3B32;
+    --soft: #A5907F;
+    --line: #F2E5D8;
+    --accent: #E07A54;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #FBEEE5;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 72px 24px 100px;
+  }
+
+  section {
+    margin: 0 0 88px;
+  }
+
+  section:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .brand {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .32em;
+    color: var(--soft);
+    margin: 0 0 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 6vw, 38px);
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: .02em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero .sub {
+    font-size: 16px;
+    color: var(--soft);
+    margin: 0 0 40px;
+  }
+
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-radius: var(--radius);
+    padding: 16px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+
+  .cta.disabled {
+    background: var(--accent-soft);
+    color: var(--soft);
+    pointer-events: none;
+  }
+
+  .cta-note {
+    display: block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--soft);
+  }
+
+  h2.eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--soft);
+    margin: 0 0 18px;
+  }
+
+  .lead {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.9;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .body-text {
+    font-size: 16px;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .steps li {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .step-body .step-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 4px;
+  }
+
+  .step-body .step-desc {
+    font-size: 15px;
+    color: var(--soft);
+    margin: 0;
+  }
+
+  .discovery-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    margin-top: 28px;
+  }
+
+  .discovery-card .discovery-label {
+    font-size: 11px;
+    color: var(--soft);
+    letter-spacing: .1em;
+    margin: 0 0 14px;
+  }
+
+  .discovery-card .discovery-text {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  .discovery-card .discovery-text em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .trust-list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .trust-list li {
+    font-size: 15px;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ink);
+  }
+
+  .trust-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .foot {
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+    text-align: center;
+  }
+
+  .foot-links {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .foot-links a {
+    color: var(--soft);
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .disclosure {
+    font-size: 12px;
+    color: var(--soft);
+    line-height: 1.8;
+    max-width: 480px;
+    margin: 40px auto 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in {
+      animation: fadeIn .8s ease-out both;
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<main>
+
+  <section class="hero fade-in">
+    <p class="brand">ポチる前に</p>
+    <h1>3日後も売っていたら、<br /><em>それは買っていいもの</em>です。</h1>
+    <p class="sub">欲しいものを寝かせる、我慢リストアプリ。</p>
+    <a class="cta disabled" href="#">近日公開</a>
+    <span class="cta-note">App Store・無料</span>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">こんな経験、ありませんか</h2>
+    <p class="lead">欲しいものを見つけた。今すぐポチりたい。<br />でも先月も同じことをして、後悔した——</p>
+    <p class="body-text">「ポチる前に」は、欲しいものを"x日だけ寝かせる"ためのアプリです。我慢するのは、あなたの意志ではなく、仕組みの方です。</p>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">使い方は3ステップ</h2>
+    <ol class="steps">
+      <li>
+        <span class="step-num">01</span>
+        <div class="step-body">
+          <p class="step-title">共有ボタンから、3タップで登録</p>
+          <p class="step-desc">商品ページの共有ボタンから「ポチる前に」を選んで、我慢する期間(3日・1週間・1ヶ月)をタップするだけ。</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">02</span>
+        <div class="step-body">
+          <p class="step-title">期限まで、忘れていい</p>
+          <p class="step-desc">アプリを開く必要はありません。欲しいものリストを眺めて物欲を育てる、ということもしません。</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">03</span>
+        <div class="step-body">
+          <p class="step-title">通知が来たら、買うか、いらないか</p>
+          <p class="step-desc">二択です。スヌーズはありません。迷ったまま放置しても、もう一度だけ聞いて、それで静かに消えます。</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">リストは眺められません。わざと、です</h2>
+    <p class="body-text">登録した欲しいものの一覧は、あえて表示しません。見えるのは「いま何件を我慢中」という数字と、こんな発見だけです。</p>
+    <div class="discovery-card">
+      <p class="discovery-label">たとえば、こんな発見が届きます</p>
+      <p class="discovery-text">これまでの12件のうち<br /><em>9件</em>は、期限が来る頃には<br />要らなくなっていました。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="eyebrow">安心して使えます</h2>
+    <ul class="trust-list">
+      <li>アカウント登録なし。データはすべて端末の中だけに残ります。</li>
+      <li>無料です。アプリ内課金も、広告表示もありません。</li>
+      <li>「買う」を選んだときだけ、商品ページが外部ブラウザで開きます。</li>
+    </ul>
+  </section>
+
+  <section class="foot">
+    <a class="cta disabled" href="#">App Storeで見る(近日公開)</a>
+    <p class="disclosure">
+      本アプリはAmazonアソシエイト・プログラムの参加者です。アプリから商品ページを開いて購入が行われた場合、開発者が紹介料を受け取ることがあります。商品の価格が変わることはありません。
+    </p>
+    <div class="foot-links">
+      <a href="https://sakuichi.github.io/pochirumaeni-support/privacy.html">プライバシーポリシー</a>
+      <a href="https://sakuichi.github.io/pochirumaeni-support/">サポート・お問い合わせ</a>
+    </div>
+  </section>
+
+</main>
